@@ -92,10 +92,7 @@ public class Util {
 	
 	public static DefaultComboBoxModel<String> cmdList() {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-		HashMap<String, String> map = new HashMap<>();
-		map.put("reboot", "reboot");
-		map.put("Focued Activity", "shell dumpsys activity | findstr \"mF\"");
-		Set set = map.keySet();
+		Set set = commandMap.getCommandMap().keySet();
 		Iterator iterator = set.iterator();
 		while (iterator.hasNext()) {
 			String string = (String) iterator.next();

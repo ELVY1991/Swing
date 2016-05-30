@@ -90,15 +90,24 @@ public class Frame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String device = null;
-				String command = null;
-				if ( comboBox.getSelectedIndex()!= -1) {
-					 device = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
-				}
-				if ( comboBox_cmd.getSelectedIndex()!= -1) {
-					 command = (String) comboBox_cmd.getItemAt(comboBox_cmd.getSelectedIndex());
-				}
-				Util.doCommand(device,command);
+				new Thread(new Runnable() {
+					public void run() {
+						String device = null;
+						String commandKey;
+						String command = null;
+						if ( comboBox.getSelectedIndex()!= -1) {
+							 device = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
+						}
+						if ( comboBox_cmd.getSelectedIndex()!= -1) {
+							 commandKey = (String) comboBox_cmd.getItemAt(comboBox_cmd.getSelectedIndex());
+							 command = commandMap.getCommandMap().get(commandKey);
+						}
+						Util.doCommand(device,command);	
+						
+						
+					}
+				}).start();
+				
 			}
 		});
 	}
